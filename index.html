@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Oni Samurai (Clean V4)</title>
+  <style>
+    html,body{margin:0;height:100%;background:#000;overflow:hidden;touch-action:none;}
+    #app{position:fixed;inset:0;}
+    canvas{position:fixed;inset:0;image-rendering:pixelated;}
+    /* UI overlay */
+    #uiRoot{position:fixed;inset:0;pointer-events:none;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    #hud{position:fixed;left:12px;top:12px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8);font-weight:700;}
+    #pad{position:fixed;left:18px;bottom:18px;width:120px;height:120px;border-radius:999px;background:rgba(255,255,255,.06);border:2px solid rgba(255,215,0,.35);pointer-events:auto;touch-action:none;}
+    #stick{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:999px;background:rgba(255,215,0,.55);box-shadow:0 6px 18px rgba(0,0,0,.35);}
+    #btnAttack{position:fixed;right:18px;bottom:18px;width:120px;height:120px;border-radius:999px;background:rgba(180,0,0,.28);border:2px solid rgba(255,215,0,.35);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;user-select:none;-webkit-user-select:none;}
+    #btnAttack:active{transform:scale(.98)}
+
+    /* Panels */
+    .panelShade{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;pointer-events:auto;}
+    .panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,520px);max-height:min(80vh,640px);background:#141414;border:1px solid rgba(255,255,255,.12);border-radius:14px;display:none;pointer-events:auto;overflow:auto;}
+    .panelHeader{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);}
+    .panelTitle{color:#fff;font-weight:800}
+    .panelClose{background:#2a2a2a;color:#fff;border:0;border-radius:10px;padding:8px 10px;font-weight:800}
+    .panelBody{padding:12px 14px;color:#ddd;line-height:1.35}
+
+    /* Simple top-right buttons */
+    #topBtns{position:fixed;right:12px;top:12px;display:flex;gap:8px;pointer-events:auto}
+    .tbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:8px 10px;font-weight:800}
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <canvas id="game"></canvas>
+
+  <div id="uiRoot">
+    <div id="hud">HP <span id="hp">100</span> · LV <span id="lv">1</span></div>
+    <div id="topBtns">
+      <button class="tbtn" id="btnInv">인벤</button>
+      <button class="tbtn" id="btnCraft">제작</button>
+    </div>
+    <div id="pad"><div id="stick"></div></div>
+    <div id="btnAttack">ATTACK</div>
+
+    <div id="shade" class="panelShade"></div>
+
+    <div id="panelInv" class="panel" role="dialog" aria-modal="true">
+      <div class="panelHeader">
+        <div class="panelTitle">인벤토리</div>
+        <button class="panelClose" data-close>닫기</button>
+      </div>
+      <div class="panelBody" id="invBody">(샘플) 아이템 없음</div>
+    </div>
+
+    <div id="panelCraft" class="panel" role="dialog" aria-modal="true">
+      <div class="panelHeader">
+        <div class="panelTitle">제작</div>
+        <button class="panelClose" data-close>닫기</button>
+      </div>
+      <div class="panelBody">(샘플) 제작 목록 없음</div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
